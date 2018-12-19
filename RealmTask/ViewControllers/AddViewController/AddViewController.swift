@@ -37,7 +37,11 @@ class AddViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        viewBack.layer.cornerRadius = 8.0
+        viewBack.layer.masksToBounds = true
+        
+        saveButton.layer.cornerRadius = 8.0
+        saveButton.layer.masksToBounds = true
         // Do any additional setup after loading the view.
     }
 
@@ -46,15 +50,23 @@ class AddViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIView.animate(withDuration: 0.8) {
+            self.view.backgroundColor = UIColor.white.withAlphaComponent(0.8)
+        }
     }
-    */
+    @IBAction func closeButtonPressed()
+    {
+        dismiss(animated: true, completion: nil)
+        
+    }
+    @IBAction func saveButtonPressed()
+    {
+        
+        self.user.name = textField.text
+        delegate.addViewController(_vc: self, didEditTask: user)
+        
+    }
 
 }
